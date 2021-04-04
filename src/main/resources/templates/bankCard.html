@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>bank</title>
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="/assets/css/bootstrap-dialog.css" rel="stylesheet" type="text/css">
+    <link href="/assets/css/bootstrap-select.min.css" rel="stylesheet" type="text/css">
+    <link href="/assets/css/easyui.css" rel="stylesheet" type="text/css">
+    <link href="/assets/css/font-awesome.css" rel="stylesheet" type="text/css">
+    <link href="/ui/css/bankCard.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+    <div class="bankCardBox">
+        <div class="filterDiv">
+            <input class="searchContent" type="text" placeholder="请输入查询内容..." />
+            <button class="search">查询</button>
+        </div>
+        <div class="buttonDiv">
+            <button class="add">新增</button>
+            <button class="edit">修改</button>
+            <button class="del">删除</button>
+            <button class="detail">查看交易明细</button>
+        </div>
+        <div class="tableDiv">
+                <table id="bankCardTable" class="easyui-datagrid">
+            </table>
+        </div>
+    </div>
+
+    <script src="/assets/js/jquery-1.11.3.min.js"></script>
+    <script src="/assets/js/jquery.easyui.min.js"></script>
+    <script src="/assets/js/bootstrap.min.js"></script>
+    <script src="/assets/js/bootstrap-dialog.js"></script>
+    <script src="/assets/js/bootstrap-select.min.js"></script>
+    <script src="/ui/js/bankCard.js"></script>
+</body>
+</html>

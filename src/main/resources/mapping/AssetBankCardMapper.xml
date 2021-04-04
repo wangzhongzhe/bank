@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bozhong.bank.mapper.AssetBankCardMapper">
+
+    <select id="getSize" parameterType="map" resultType="java.lang.Integer">
+        SELECT
+            count(*)
+        FROM bank.asset_bank_card
+    </select>
+
+    <select id="getPage" parameterType="map" resultType="com.bozhong.bank.entity.AssetBankCard">
+        SELECT
+            card_id as cardId,
+            bank as bank,
+            account_holder as accountHolder,
+            card_type as cardType,
+            fixed_deposit as fixedDeposit,
+            current_deposit as currentDeposit
+        FROM bank.asset_bank_card
+        where 1 = 1
+        <if test="search!=null and search!=''">
+            and (
+                card_id like concat('%',#{search},'%')
+                or bank like concat('%',#{search},'%')
+                or account_holder like concat('%',#{search},'%')
+                or card_type like concat('%',#{search},'%')
+            )
+        </if >
+    </select>
+
+</mapper>

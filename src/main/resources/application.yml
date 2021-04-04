@@ -1,0 +1,31 @@
+server:
+  port: 8080
+
+#默认使用配置
+spring:
+  profiles:
+    active: dev
+  datasource:
+    url: jdbc:mysql://localhost:3306/bank?serverTimezone=UTC&useSSL=false
+    username: root
+    password: root
+    driver-class-name: com.mysql.jdbc.Driver
+    # 使用druid数据源
+    type: com.alibaba.druid.pool.DruidDataSource
+    # 初始化，最小，最大连接数
+    initialSize: 3
+    minidle: 3
+    maxActive: 18
+    # 获取数据库连接等待的超时时间
+    maxWait: 60000
+    #配置多久进行一次检测，检测需要关闭的空闲连接 单位毫秒
+    timeBetweenEvictionRunsMillis: 60000
+    validationQuery: SELECT 1 FROM dual
+  thymeleaf:
+    prefix: classpath:/templates/
+  mvc:
+    static-path-pattern: /**
+mybatis:
+  #typeAliasesPackage: com.bozhongqun.cat.entity
+  mapperLocations: classpath:mapping/*.xml
+
