@@ -1,12 +1,8 @@
 package com.bozhong.bank.service.impl;
 
 import com.bozhong.bank.entity.AssetBankCard;
-import com.bozhong.bank.entity.ReturnMap;
 import com.bozhong.bank.mapper.AssetBankCardMapper;
-import com.bozhong.bank.mapper.UserMapper;
-import com.bozhong.bank.entity.UserInfo;
 import com.bozhong.bank.service.BankCardService;
-import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +12,6 @@ import java.util.Map;
 
 @Service
 public class BankCardServiceImpl implements BankCardService {
-
     @Autowired
     private AssetBankCardMapper assetBankCardMapper;
 
@@ -35,5 +30,14 @@ public class BankCardServiceImpl implements BankCardService {
 //        returnMap.setJsonData(JSONObject.fromObject(jsonData).toString());
 
         return ret;
+    }
+
+    @Override
+    public boolean insertBankCardInfo(AssetBankCard assetBankCard) {
+        if (assetBankCardMapper.getAssetBankCard(assetBankCard.getCardId()) == 0) {
+            return false;
+        }
+        int result = assetBankCardMapper.insertBankCardInfo(assetBankCard);
+        return result > 0;
     }
 }

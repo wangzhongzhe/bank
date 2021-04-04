@@ -1,14 +1,13 @@
 package com.bozhong.bank.entity;
 
 public class ReturnMap {
-
     private Boolean status;
 
     private String message;
 
     private String jsonData;
 
-    public ReturnMap(){
+    public ReturnMap() {
         this.status = true;
         this.message = "操作成功";
     }

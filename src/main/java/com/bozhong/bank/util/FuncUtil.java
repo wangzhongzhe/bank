@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class FuncUtil {
-
     public static Map getReturnMap(){
         Map<String, Object> map = new HashMap<>();
         map.put("status", true);

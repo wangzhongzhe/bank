@@ -1,4 +1,4 @@
-package com.bozhongqun.cat.util;
+package com.bozhong.bank.util;
 
 import com.alibaba.druid.support.http.StatViewServlet;
 import com.alibaba.druid.support.http.WebStatFilter;
@@ -9,7 +9,6 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class DruidConfiguration {
-
     /**
      * 注册一个StatViewServlet
      *
