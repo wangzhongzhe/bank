@@ -1,7 +1,10 @@
 package com.bozhong.bank.entity;
 
+import lombok.Data;
+
+@Data
 public class ReturnMap {
-    private Boolean status;
+    private boolean status;
 
     private String message;
 
@@ -12,27 +15,8 @@ public class ReturnMap {
         this.message = "操作成功";
     }
 
-    public Boolean getStatus() {
-        return status;
-    }
-
-    public void setStatus(Boolean status) {
+    public ReturnMap(boolean status, String message) {
         this.status = status;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
         this.message = message;
-    }
-
-    public String getJsonData() {
-        return jsonData;
-    }
-
-    public void setJsonData(String jsonData) {
-        this.jsonData = jsonData;
     }
 }

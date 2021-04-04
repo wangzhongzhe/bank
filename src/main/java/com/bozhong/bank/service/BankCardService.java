@@ -1,11 +1,11 @@
 package com.bozhong.bank.service;
 
-import com.bozhong.bank.entity.AssetBankCard;
+import com.bozhong.bank.entity.ReturnMap;
 
 import java.util.Map;
 
 public interface BankCardService {
     Map getBankCardPage(Map map);
 
-    boolean insertBankCardInfo(AssetBankCard assetBankCard);
+    ReturnMap insertBankCardInfo(Map<String, Object> map);
 }

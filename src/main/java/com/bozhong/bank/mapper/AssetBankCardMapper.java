@@ -15,5 +15,5 @@ public interface AssetBankCardMapper {
 
     int getAssetBankCard(@Param("cardId") String cardId);
 
-    int insertBankCardInfo(@Param("item") AssetBankCard assetBankCard);
+    int insertBankCardInfo(AssetBankCard assetBankCard);
 }

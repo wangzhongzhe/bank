@@ -1,7 +1,6 @@
 package com.bozhong.bank.controller;
 
-import com.bozhong.bank.entity.AssetBankCard;
-import com.bozhong.bank.mapper.AssetBankCardMapper;
+import com.bozhong.bank.entity.ReturnMap;
 import com.bozhong.bank.service.BankCardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,7 +24,7 @@ public class BankCardController {
 
     @ResponseBody
     @RequestMapping(value = "/insertBankCardInfo")
-    boolean insertBankCardInfo(@RequestParam AssetBankCard assetBankCard) {
-        return bankCardService.insertBankCardInfo(assetBankCard);
+    ReturnMap insertBankCardInfo(@RequestParam Map<String, Object> map) {
+        return bankCardService.insertBankCardInfo(map);
     }
 }

@@ -1,6 +1,7 @@
 package com.bozhong.bank.service.impl;
 
 import com.bozhong.bank.entity.AssetBankCard;
+import com.bozhong.bank.entity.ReturnMap;
 import com.bozhong.bank.mapper.AssetBankCardMapper;
 import com.bozhong.bank.service.BankCardService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,11 +34,18 @@ public class BankCardServiceImpl implements BankCardService {
     }
 
     @Override
-    public boolean insertBankCardInfo(AssetBankCard assetBankCard) {
-        if (assetBankCardMapper.getAssetBankCard(assetBankCard.getCardId()) == 0) {
-            return false;
+    public ReturnMap insertBankCardInfo(Map<String, Object> map) {
+        AssetBankCard assetBankCard = new AssetBankCard();
+        assetBankCard.setCardId(String.valueOf(map.get("cardId")));
+        assetBankCard.setBank(String.valueOf(map.get("bank")));
+        assetBankCard.setAccountHolder(String.valueOf(map.get("accountHolder")));
+        assetBankCard.setCardType(String.valueOf(map.get("cardType")));
+        assetBankCard.setFixedDeposit(Float.parseFloat(String.valueOf(map.get("fixedDeposit"))));
+        assetBankCard.setCurrentDeposit(Float.parseFloat(String.valueOf(map.get("currentDeposit"))));
+        if (assetBankCardMapper.getAssetBankCard(assetBankCard.getCardId()) > 0) {
+            return new ReturnMap(false, "此卡号已存在");
         }
         int result = assetBankCardMapper.insertBankCardInfo(assetBankCard);
-        return result > 0;
+        return result > 0 ? new ReturnMap(true, "新增成功") : new ReturnMap(false, "新增失败");
     }
 }

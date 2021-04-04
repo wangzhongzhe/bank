@@ -3,31 +3,64 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.bozhong.bank.mapper.AssetBankCardMapper">
+    <resultMap id="assetBankCard" type="com.bozhong.bank.entity.AssetBankCard">
+        <result column="card_id" jdbcType="VARCHAR" property="cardId"/>
+        <result column="bank" jdbcType="VARCHAR" property="bank"/>
+        <result column="account_holder" jdbcType="VARCHAR" property="accountHolder"/>
+        <result column="card_type" jdbcType="VARCHAR" property="cardType"/>
+        <result column="fixed_deposit" jdbcType="FLOAT" property="fixedDeposit"/>
+        <result column="current_deposit" jdbcType="FLOAT" property="currentDeposit"/>
+    </resultMap>
 
     <select id="getSize" parameterType="map" resultType="java.lang.Integer">
         SELECT
-            count(*)
+        count(*)
         FROM bank.asset_bank_card
     </select>
 
     <select id="getPage" parameterType="map" resultType="com.bozhong.bank.entity.AssetBankCard">
         SELECT
-            card_id as cardId,
-            bank as bank,
-            account_holder as accountHolder,
-            card_type as cardType,
-            fixed_deposit as fixedDeposit,
-            current_deposit as currentDeposit
+        card_id as cardId,
+        bank as bank,
+        account_holder as accountHolder,
+        card_type as cardType,
+        fixed_deposit as fixedDeposit,
+        current_deposit as currentDeposit
         FROM bank.asset_bank_card
         where 1 = 1
         <if test="search!=null and search!=''">
             and (
-                card_id like concat('%',#{search},'%')
-                or bank like concat('%',#{search},'%')
-                or account_holder like concat('%',#{search},'%')
-                or card_type like concat('%',#{search},'%')
+            card_id like concat('%',#{search},'%')
+            or bank like concat('%',#{search},'%')
+            or account_holder like concat('%',#{search},'%')
+            or card_type like concat('%',#{search},'%')
             )
-        </if >
+        </if>
     </select>
 
+    <select id="getAssetBankCard" parameterType="String" resultType="java.lang.Integer">
+        SELECT
+        count(*)
+        FROM bank.asset_bank_card
+        WHERE card_id = #{cardId}
+    </select>
+
+    <insert id="insertBankCardInfo" parameterType="com.bozhong.bank.entity.AssetBankCard">
+        INSERT INTO bank.asset_bank_card
+        (
+            card_id,
+            bank,
+            account_holder,
+            card_type,
+            fixed_deposit,
+            current_deposit
+        )VALUES(
+            #{cardId},
+            #{bank},
+            #{accountHolder},
+            #{cardType},
+            #{fixedDeposit},
+            #{currentDeposit}
+        )
+    </insert>
 </mapper>
