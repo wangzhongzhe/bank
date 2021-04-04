@@ -19,20 +19,25 @@ $(document).ready(function(){
     });
 
     $("body").on("click",".buttonDiv .add",function(){
-        var msgDom = $('<>');
-
+        var msgDom = $('<div class="upTop"></div>');
+        msgDom.append('<div class="line"><em>卡号：</em><div class="sInput"><input type="text" class="cardId"/></div></div>');
+        msgDom.append('<div class="line"><em>银行：</em><div class="sInput"><input type="text" class="bank"/></div></div>');
+        msgDom.append('<div class="line"><em>开户人：</em><div class="sInput"><input type="text" class="accountHolder"/></div></div>');
+        msgDom.append('<div class="line"><em>类型：</em><div class="sInput"><input type="text" class="cardType"/></div></div>');
+        msgDom.append('<div class="line"><em>定期存款：</em><div class="sInput"><input type="text" class="fixedDeposit"/></div></div>');
+        msgDom.append('<div class="line"><em>活期存款：</em><div class="sInput"><input type="text" class="currentDeposit"/></div></div>');
         BootstrapDialog.show({
             title: '新建',
-            message: 'Click buttons below.',
+            message: msgDom,
             buttons: [{
-                label: 'Message 1',
+                label: '提交',
                 action: function(dialog) {
-                    dialog.setMessage('Message 1');
+                    console.log("提交");
                 }
             }, {
-                label: 'Message 2',
+                label: '取消',    
                 action: function(dialog) {
-                    dialog.setMessage('Message 2');
+                    dialog.close();
                 }
             }]
         });

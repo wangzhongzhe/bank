@@ -159,3 +159,23 @@ html, body {
 .datagrid-htable td div, .datagrid-btable td div {
     margin: 0 auto;
 }
+
+.upTop .line {
+    margin-bottom: 15px;
+}
+
+.upTop .line em{
+    font-style: normal;
+    float: left;
+    width: 120px;
+    text-align: right;
+}
+
+.upTop .line .sInput{
+    margin-left: 120px;
+    padding: 0 15px;
+}
+
+.upTop .line .sInput input {
+    width: 100%;
+}
