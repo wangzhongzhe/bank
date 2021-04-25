@@ -20,6 +20,7 @@
 
     <select id="getPage" parameterType="map" resultType="com.bozhong.bank.entity.AssetBankCard">
         SELECT
+        id as id,
         card_id as cardId,
         bank as bank,
         account_holder as accountHolder,
