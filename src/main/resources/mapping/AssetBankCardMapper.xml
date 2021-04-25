@@ -4,6 +4,7 @@
 
 <mapper namespace="com.bozhong.bank.mapper.AssetBankCardMapper">
     <resultMap id="assetBankCard" type="com.bozhong.bank.entity.AssetBankCard">
+        <result column="id" jdbcType="VARCHAR" property="id"/>
         <result column="card_id" jdbcType="VARCHAR" property="cardId"/>
         <result column="bank" jdbcType="VARCHAR" property="bank"/>
         <result column="account_holder" jdbcType="VARCHAR" property="accountHolder"/>
@@ -64,4 +65,19 @@
             #{currentDeposit}
         )
     </insert>
+
+    <update id="updateBankCardInfo" parameterType="com.bozhong.bank.entity.AssetBankCard">
+        UPDATE bank.asset_bank_card SET
+        card_id = #{cardId},
+        bank = #{bank},
+        account_holder = #{accountHolder},
+        card_type = #{cardType},
+        fixed_deposit = #{fixedDeposit},
+        current_deposit = #{currentDeposit}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteBankCardInfo">
+        delete from bank.asset_bank_card where id = #{id}
+    </delete>
 </mapper>
