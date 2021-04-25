@@ -4,6 +4,7 @@ import com.bozhong.bank.entity.AssetBankCard;
 import com.bozhong.bank.entity.ReturnMap;
 import com.bozhong.bank.mapper.AssetBankCardMapper;
 import com.bozhong.bank.service.BankCardService;
+import com.bozhong.bank.util.FuncUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,27 +36,25 @@ public class BankCardServiceImpl implements BankCardService {
 
     @Override
     public ReturnMap insertBankCardInfo(Map<String, Object> map) {
-        AssetBankCard assetBankCard = new AssetBankCard();
-        assetBankCard.setCardId(String.valueOf(map.get("cardId")));
-        assetBankCard.setBank(String.valueOf(map.get("bank")));
-        assetBankCard.setAccountHolder(String.valueOf(map.get("accountHolder")));
-        assetBankCard.setCardType(String.valueOf(map.get("cardType")));
-        assetBankCard.setFixedDeposit(Float.parseFloat(String.valueOf(map.get("fixedDeposit"))));
-        assetBankCard.setCurrentDeposit(Float.parseFloat(String.valueOf(map.get("currentDeposit"))));
+        AssetBankCard assetBankCard = FuncUtil.getAssetBankCardFromMap(map);
         if (assetBankCardMapper.getAssetBankCard(assetBankCard.getCardId()) > 0) {
             return new ReturnMap(false, "此卡号已存在");
         }
         int result = assetBankCardMapper.insertBankCardInfo(assetBankCard);
-        return result > 0 ? new ReturnMap(true, "新增成功") : new ReturnMap(false, "新增失败");
+        return FuncUtil.getReturnMapFromResult(result, "新建成功", "新建失败");
     }
 
     @Override
     public ReturnMap updateBankCardInfo(Map<String, Object> map) {
-        return null;
+        AssetBankCard assetBankCard = FuncUtil.getAssetBankCardFromMap(map);
+        int result = assetBankCardMapper.updateBankCardInfo(assetBankCard);
+        return result > 0 ? new ReturnMap(true, "更新成功") : new ReturnMap(false, "更新失败");
     }
 
     @Override
     public ReturnMap deleteBankCardInfo(Map<String, Object> map) {
-        return null;
+        int id = Integer.parseInt((String) map.get("id"));
+        int result = assetBankCardMapper.deleteBankCardInfo(id);
+        return result > 0 ? new ReturnMap(true, "删除成功") : new ReturnMap(false, "删除失败");
     }
 }
