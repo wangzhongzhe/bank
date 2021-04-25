@@ -8,7 +8,7 @@ var commonUtils = {
 			var type = item.type;
 			var disable = item.disable;
 			var $itemDom = $('<div class="line"><em></em><div class="sInput"></div></div>');
-			$itemDom.attr("id-data", id);
+			$itemDom.attr('id-data', id);
 			$itemDom.find('em').html(name + ":");
 			if(item.type == '1') {
 				$itemDom.find('.sInput').html('<input class="inn" type="text" />');
@@ -19,10 +19,18 @@ var commonUtils = {
 			    $itemDom.find('.inn').val(valueData[id]);
 			}
 			if(disable) {
-				$itemDom.find('.inn').attr("disable", "disable");
+				$itemDom.find('.inn').attr('disable', 'disable');
 			}
 			$dom.append($itemDom);
 		}
 		return $dom;
+	},
+	getDomValue: function(dom){
+	    var $dom = $(dom);
+	    var value = {};
+	    $dom.find('.line').each(function(e){
+	        value[$(this).attr('id-data')] = $(this).find('.inn').val();
+	    });
+	    return value;
 	}
 }

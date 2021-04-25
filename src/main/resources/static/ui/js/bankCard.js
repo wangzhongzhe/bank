@@ -83,14 +83,15 @@ $(document).ready(function() {
 			buttons: [{
 				label: '提交',
 				action: function(dialog) {
-					var data = {
-						cardId: 　$(".addUpTop .cardId").val(),
-						bank: 　$(".addUpTop .bank").val(),
-						accountHolder: 　$(".addUpTop .accountHolder").val(),
-						cardType: 　$(".addUpTop .cardType").val(),
-						fixedDeposit: 　$(".addUpTop .fixedDeposit").val(),
-						currentDeposit: 　$(".addUpTop .currentDeposit").val(),
-					};
+//					var data = {
+//						cardId: 　$(".addUpTop .cardId").val(),
+//						bank: 　$(".addUpTop .bank").val(),
+//						accountHolder: 　$(".addUpTop .accountHolder").val(),
+//						cardType: 　$(".addUpTop .cardType").val(),
+//						fixedDeposit: 　$(".addUpTop .fixedDeposit").val(),
+//						currentDeposit: 　$(".addUpTop .currentDeposit").val(),
+//					};
+                    var data = commonUtils.getDomValue('.zTop');
 					$.ajax({
 						url: "/bank/insertBankCardInfo",
 						type: 'POST',
