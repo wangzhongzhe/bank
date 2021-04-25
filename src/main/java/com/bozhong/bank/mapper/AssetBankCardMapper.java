@@ -19,5 +19,5 @@ public interface AssetBankCardMapper {
 
     int updateBankCardInfo(AssetBankCard assetBankCard);
 
-    int deleteBankCardInfo(@Param("id") int cardId);
+    int deleteBankCardInfo(@Param("ids") String ids);
 }

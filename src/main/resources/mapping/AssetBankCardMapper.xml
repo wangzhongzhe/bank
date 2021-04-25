@@ -50,19 +50,19 @@
     <insert id="insertBankCardInfo" parameterType="com.bozhong.bank.entity.AssetBankCard">
         INSERT INTO bank.asset_bank_card
         (
-            card_id,
-            bank,
-            account_holder,
-            card_type,
-            fixed_deposit,
-            current_deposit
+        card_id,
+        bank,
+        account_holder,
+        card_type,
+        fixed_deposit,
+        current_deposit
         )VALUES(
-            #{cardId},
-            #{bank},
-            #{accountHolder},
-            #{cardType},
-            #{fixedDeposit},
-            #{currentDeposit}
+        #{cardId},
+        #{bank},
+        #{accountHolder},
+        #{cardType},
+        #{fixedDeposit},
+        #{currentDeposit}
         )
     </insert>
 
@@ -78,6 +78,6 @@
     </update>
 
     <delete id="deleteBankCardInfo">
-        delete from bank.asset_bank_card where id = #{id}
+        delete from bank.asset_bank_card where id in (#{ids})
     </delete>
 </mapper>

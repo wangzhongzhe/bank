@@ -40,21 +40,18 @@ public class BankCardServiceImpl implements BankCardService {
         if (assetBankCardMapper.getAssetBankCard(assetBankCard.getCardId()) > 0) {
             return new ReturnMap(false, "此卡号已存在");
         }
-        int result = assetBankCardMapper.insertBankCardInfo(assetBankCard);
-        return FuncUtil.getReturnMapFromResult(result, "新建成功", "新建失败");
+        return FuncUtil.getReturnMapFromResult(assetBankCardMapper.insertBankCardInfo(assetBankCard), "新建成功", "新建失败");
     }
 
     @Override
     public ReturnMap updateBankCardInfo(Map<String, Object> map) {
         AssetBankCard assetBankCard = FuncUtil.getAssetBankCardFromMap(map);
-        int result = assetBankCardMapper.updateBankCardInfo(assetBankCard);
-        return result > 0 ? new ReturnMap(true, "更新成功") : new ReturnMap(false, "更新失败");
+        return FuncUtil.getReturnMapFromResult(assetBankCardMapper.updateBankCardInfo(assetBankCard), "更新成功", "更新失败");
     }
 
     @Override
     public ReturnMap deleteBankCardInfo(Map<String, Object> map) {
-        int id = Integer.parseInt((String) map.get("id"));
-        int result = assetBankCardMapper.deleteBankCardInfo(id);
-        return result > 0 ? new ReturnMap(true, "删除成功") : new ReturnMap(false, "删除失败");
+        String ids = (String) map.get("idList");
+        return FuncUtil.getReturnMapFromResult(assetBankCardMapper.deleteBankCardInfo(ids), "删除成功", "删除失败");
     }
 }

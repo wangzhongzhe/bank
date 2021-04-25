@@ -5,6 +5,7 @@ import com.bozhong.bank.entity.ReturnMap;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Function;
 
 public class FuncUtil {
     public static ReturnMap getReturnMapFromResult(int result, String successMsg, String failMsg){
