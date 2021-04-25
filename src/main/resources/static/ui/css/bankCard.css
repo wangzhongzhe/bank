@@ -160,22 +160,22 @@ html, body {
     margin: 0 auto;
 }
 
-.addUpTop .line {
+.zTop .line {
     margin-bottom: 15px;
 }
 
-.addUpTop .line em{
+.zTop .line em{
     font-style: normal;
     float: left;
     width: 120px;
     text-align: right;
 }
 
-.addUpTop .line .sInput{
+.zTop .line .sInput{
     margin-left: 120px;
     padding: 0 15px;
 }
 
-.addUpTop .line .sInput input {
+.zTop .line .sInput input {
     width: 100%;
 }
