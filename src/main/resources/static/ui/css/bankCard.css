@@ -12,6 +12,10 @@ html, body {
     -webkit-box-sizing:border-box; /* Safari */
 }
 
+.hidden {
+    display: none;
+}
+
 .bankCardBox{
     width: 100%;
     height: 100%;

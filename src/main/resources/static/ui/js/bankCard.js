@@ -3,6 +3,13 @@ var bankCard = [
 		field: 'ck',
 		checkbox: true
 	}, {
+		field: 'id',
+		title: '主键',
+		width: 120,
+		sortable: true,
+		resizable: true,
+		hidden: true
+	}, {
 		field: 'cardId',
 		title: '卡号',
 		width: 120,
@@ -51,47 +58,39 @@ $(document).ready(function() {
 
 	$("body").on("click", ".buttonDiv .add", function() {
 		var domData = [{
-            "id": "cardId",
-            "name": "卡号",
-            "type": "1"
-        }, {
-            "id": "bank",
-            "name": "银行",
-            "type": "1"
-        }, {
-            "id": "accountHolder",
-            "name": "开户人",
-            "type": "1"
-        }, {
-            "id": "cardType",
-            "name": "类型",
-            "type": "1"
-        }, {
-            "id": "fixedDeposit",
-            "name": "定期存款",
-            "type": "1"
-        }, {
-            "id": "currentDeposit",
-            "name": "活期存款",
-            "type": "1"
-        }];
+			"id": "cardId",
+			"name": "卡号",
+			"type": "1"
+		}, {
+			"id": "bank",
+			"name": "银行",
+			"type": "1"
+		}, {
+			"id": "accountHolder",
+			"name": "开户人",
+			"type": "1"
+		}, {
+			"id": "cardType",
+			"name": "类型",
+			"type": "1"
+		}, {
+			"id": "fixedDeposit",
+			"name": "定期存款",
+			"type": "1"
+		}, {
+			"id": "currentDeposit",
+			"name": "活期存款",
+			"type": "1"
+		}];
 
-        var msgDom = commonUtils.makePanelDom(domData);
+		var msgDom = commonUtils.makePanelDom(domData);
 		BootstrapDialog.show({
 			title: '新建',
 			message: msgDom,
 			buttons: [{
 				label: '提交',
 				action: function(dialog) {
-//					var data = {
-//						cardId: 　$(".addUpTop .cardId").val(),
-//						bank: 　$(".addUpTop .bank").val(),
-//						accountHolder: 　$(".addUpTop .accountHolder").val(),
-//						cardType: 　$(".addUpTop .cardType").val(),
-//						fixedDeposit: 　$(".addUpTop .fixedDeposit").val(),
-//						currentDeposit: 　$(".addUpTop .currentDeposit").val(),
-//					};
-                    var data = commonUtils.getDomValue('.zTop');
+					var data = commonUtils.getDomValue('.zTop');
 					$.ajax({
 						url: "/bank/insertBankCardInfo",
 						type: 'POST',
@@ -123,10 +122,24 @@ $(document).ready(function() {
 	});
 
 	$("body").on("click", ".buttonDiv .edit", function() {
+		var rows = $('#bankCardTable').datagrid('getSelections');
+		if(rows.length > 1) {
+			alert("只能选择单条数据");
+			return;
+		} else if(rows.length == 0) {
+			alert("请选择数据");
+			return;
+		}
 		var domData = [{
+			"id": "id",
+			"name": "主键",
+			"type": "1",
+			"hidden": true
+		}, {
 			"id": "cardId",
 			"name": "卡号",
-			"type": "1"
+			"type": "1",
+			"disable": true
 		}, {
 			"id": "bank",
 			"name": "银行",
@@ -149,26 +162,69 @@ $(document).ready(function() {
 			"type": "1"
 		}];
 
-		var msgDom = commonUtils.makePanelDom(domData);
-		debugger
+		var msgDom = commonUtils.makePanelDom(domData, rows[0]);
 		BootstrapDialog.show({
 			title: '修改',
 			message: msgDom,
 			buttons: [{
 				label: '提交',
 				action: function(dialog) {
-					var data = {
-						cardId: 　$(".addUpTop .cardId").val(),
-						bank: 　$(".addUpTop .bank").val(),
-						accountHolder: 　$(".addUpTop .accountHolder").val(),
-						cardType: 　$(".addUpTop .cardType").val(),
-						fixedDeposit: 　$(".addUpTop .fixedDeposit").val(),
-						currentDeposit: 　$(".addUpTop .currentDeposit").val(),
-					};
+					var data = commonUtils.getDomValue('.zTop');
 					$.ajax({
-						url: "/bank/insertBankCardInfo",
+						url: "/bank/updateBankCardInfo",
 						type: 'POST',
 						data: data,
+						dataType: "json",
+						async: false,
+						success: function(data) {
+							//先清理缓存dom
+							if(data.status) {
+								getTableData();
+							} else {
+								alert(data.message);
+							}
+						},
+						error: function(data) {
+							if(data.status == '500') {
+								showAlertDialog("服务器内部错误!");
+							}
+						}
+					});
+				}
+			}, {
+				label: '取消',
+				action: function(dialog) {
+					dialog.close();
+				}
+			}]
+		});
+	});
+
+	$("body").on("click", ".buttonDiv .del", function() {
+		var rows = $('#bankCardTable').datagrid('getSelections');
+		if(rows.length == 0) {
+			alert("请选择数据");
+			return;
+		}
+		var idList = [];
+		var nameList = [];
+		for(var i = 0; i < rows.length; i++) {
+			idList.push(rows[i].id);
+			nameList.push(rows[i].cardId);
+		}
+		BootstrapDialog.show({
+			title: '删除',
+			message: "请确认是否删除以下卡信息，" + nameList.join("、"),
+			buttons: [{
+				label: '提交',
+				action: function(dialog) {
+					var data = commonUtils.getDomValue('.zTop');
+					$.ajax({
+						url: "/bank/deleteBankCardInfo",
+						type: 'POST',
+						data: {
+							"idList": idList.join(",")
+						},
 						dataType: "json",
 						async: false,
 						success: function(data) {
@@ -199,7 +255,6 @@ $(document).ready(function() {
 
 var getTableData = function() {
 	var search = $(".searchContent").val();
-	console.log(search);
 	$('#bankCardTable').datagrid({
 		url: '/bank/select',
 		columns: bankCard,
