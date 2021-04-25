@@ -27,4 +27,16 @@ public class BankCardController {
     ReturnMap insertBankCardInfo(@RequestParam Map<String, Object> map) {
         return bankCardService.insertBankCardInfo(map);
     }
+
+    @ResponseBody
+    @RequestMapping(value = "/updateBankCardInfo")
+    ReturnMap updateBankCardInfo(@RequestParam Map<String, Object> map) {
+        return bankCardService.updateBankCardInfo(map);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/deleteBankCardInfo")
+    ReturnMap deleteBankCardInfo(@RequestParam Map<String, Object> map) {
+        return bankCardService.deleteBankCardInfo(map);
+    }
 }

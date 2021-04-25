@@ -48,4 +48,14 @@ public class BankCardServiceImpl implements BankCardService {
         int result = assetBankCardMapper.insertBankCardInfo(assetBankCard);
         return result > 0 ? new ReturnMap(true, "新增成功") : new ReturnMap(false, "新增失败");
     }
+
+    @Override
+    public ReturnMap updateBankCardInfo(Map<String, Object> map) {
+        return null;
+    }
+
+    @Override
+    public ReturnMap deleteBankCardInfo(Map<String, Object> map) {
+        return null;
+    }
 }
